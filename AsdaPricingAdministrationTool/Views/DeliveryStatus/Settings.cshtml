@@ -1,0 +1,105 @@
+﻿@model IEnumerable<AsdaPricingAdministrationTool.Models.Parameters>
+
+
+
+<h1 style="padding-top:1em;text-align:center;color:olivedrab">
+    @*<input type="submit" value="Main Menu" class="btn btn-default Menu" onclick="location.href='@Url.Action("Index", "Home")'" /><span class=intro><u>Delivery Status</u></span>*@
+    Settings
+</h1>
+
+<br>
+
+<body style="background-color:white;height: 1000px;">
+    <table class="table table-bordered table-bordered">
+        <thead>
+            <tr>
+                <th style="width: 14.9em;">
+                    Name
+                </th>
+                <th style="width: 22em;">
+                    Value
+                <th style="width: 22em;">
+                    Desc
+                </th>
+                <th style="width: 13em;">
+                    Date/Time
+                </th>
+                <th style="width: 11.4em;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        <td colspan="5">
+            <div style="text-align:left;overflow: auto;height: 350px">
+                <table class=" table table-bordered table-bordered">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="ParamName"style="width: 14.2em;">
+                                <span id="paramname1">@item.ParamName</span>
+                            </td>
+                            <td class="value" style="width: 22em;">
+                                <span id="@item.ParamValue+1" value="@item.ParamValue">@item.ParamValue</span>
+                                <input type="text" value="@item.ParamValue" id="@item.ParamValue+2" style="display:none;width:25em;height:4em" />
+
+                            </td>
+                            <td class="desc" style="width: 22em;">
+                                <span>@item.ParamDesc)</span>
+                            </td>
+                            <td class="datetime" style="width: 13em;">
+                                <span>@item.DateTime</span>
+                            </td>
+                            <td style="width:9.5em;">
+                                <a onclick="ChangeView('@item.ParamValue')" id="@item.ParamValue+edit" style="cursor:pointer" >Edit</a>
+                                @* <a onclick="location.href='@Url.Action("Settings", "DeliveryStatus", new {Paramval=item.ParamValue,id =item.PID ,update=0}),ChangeView(),'">Edit</a>*@
+                                <a onclick="saveview(@item.PID)" style="display:none;cursor:pointer" id="@item.ParamValue+save">Save</a>
+                                <a onclick="cancelview()" style="display:none;cursor:pointer" id="@item.ParamValue+cancel">Cancel</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </td>
+        </tbody>
+    </table>
+</body>
+
+
+
+
+    <script type="text/javascript">
+        var value1 = '', value2 = '', valueedit = '', valuesave = '', valuecancel = '';
+        function ChangeView(value) {
+            value1 = value + '+1';
+            value2 = value + '+2';
+            valueedit = value + '+edit'
+            valuesave = value + '+save'
+            valuecancel = value + '+cancel'
+            document.getElementById(value2).style.display = 'block'
+            document.getElementById(value1).style.display = 'none'
+            //document.getElementById(valueedit).style.display ='none'
+            var rem = document.querySelectorAll("[id*='edit']"), i = 0;
+            for (; i < rem.length; i++)
+                rem[i].parentNode.removeChild(rem[i]);
+            document.getElementById(valuesave).style.display = 'block'
+            document.getElementById(valuecancel).style.display = 'block'
+
+        }
+        function saveview(value) {
+            placeholder = document.getElementById(value2).value;
+            console.log(placeholder);
+            console.log(value);
+            // https://localhost:44363/Settings?Paramval=0&id=1&update=1
+            window.location.href = 'https://localhost:44363/Settings'
+            window.location.href = `${window.location.href}?Paramval=${placeholder}&id=${value}&update=1`;
+            console.log(window.location.href);
+            //    window.location.href = Url.Action("Settings", "DeliveryStatus", new { Paramval= placeholder, id = Value, update = 1 });
+            document.getElementById(value2).style.display = 'none'
+            document.getElementById(value1).style.display = 'block'
+            document.getElementById(valuesave).style.display = 'none'
+            document.getElementById(valuecancel).style.display = 'none'
+            document.getElementById(valueedit).style.display = 'block'
+        }
+        function cancelview() {
+            window.location.href = 'https://localhost:44363/Settings'
+        }
+    </script>

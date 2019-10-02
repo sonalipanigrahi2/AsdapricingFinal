@@ -1,0 +1,64 @@
+﻿
+
+a {
+    color: olivedrab;
+}
+
+.intro {
+    padding-left: 7em;
+    font-size: 3em;
+    color: olivedrab
+}
+
+.Week {
+    padding-left: 22.5em;
+    padding-top: 0.5em;
+    font-size: 1.5em;
+    color: olivedrab
+}
+
+table {
+    border: 1px solid black;
+}
+
+th {
+    background-color: olivedrab;
+    text-align: center;
+    color: white;
+    padding: 15px;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+/*tr:nth-child(even) {
+    background-color: #f2f2f2;
+}*/
+/*.headerSortDown:after {
+    content: " ▾";
+    font-family: Arial, sans-serif;
+}*/
+td {
+    text-align: Left;
+    word-break: break-all;
+}
+
+table tbody div {
+    overflow: auto;
+    height: 530px;
+}
+/*body {
+    background-image: url('IRI_logo_372x160');
+    margin: 0;
+}*/
+
+.Menu {
+    font-weight: bolder;
+    background-color: olivedrab;
+    border-style: solid;
+    color: white;
+    font-size: 1.4em;
+    border-style: double;
+    border-color: olive;
+    border-width: 5px;
+}
