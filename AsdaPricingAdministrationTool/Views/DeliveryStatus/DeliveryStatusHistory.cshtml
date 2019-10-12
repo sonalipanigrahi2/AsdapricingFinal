@@ -3,65 +3,55 @@
 
 
 
-<h1 style="padding-top:1em;text-align:center;color:olivedrab">
-    @*<input type="submit" value="Main Menu" class="btn btn-default Menu" onclick="location.href='@Url.Action("Index", "Home")'" /><span class=intro><u>Delivery Status</u></span>*@
+<h1 style="padding-top:1.1em;text-align:center;color:olivedrab">
     History
 </h1>
-@*<h3 style="text-align:center;color:olivedrab">
-        <script>
-            document.write(Date().substring(0, 15));
-        </script>
-    </h3>*@
+<br>
 <body style="background-color:white;height: 1000px;">
-        <table class="table table-bordered table-bordered">
+    <div>
+        <table class="table table-bordered" style="margin:auto;font-size:0.9em;width: 80%">
             <thead>
                 <tr>
-                    <th style="width:9.5em">
-                    Delivery
+                    <th style="width:8.5em;border-color:olivedrab">
+                        Delivery
                     </th>
-                    <th style="width: 19.5em;">
+                    <th style="width: 15em;border-color:olivedrab">
                         Step
                     </th>
-                    <th style="width: 6em;">
+                    <th style="width: 5.2em;border-color:olivedrab">
                         Status
                     </th>
-                    <th style="width: 11.9em;">
+                    <th style="width: 10.3em;border-color:olivedrab">
                         Date/Time
                     </th>
-                    <th style="width: 34em;">
+                    <th style="width: 34em;border-color:olivedrab">
                         Notes
                     </th>
                 </tr>
             </thead>
             <tbody>
-            <td colspan="5">
-                <div>
-                    <table class=" table table-bordered table-bordered">
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td style="width: 9em;">
-                                    @Html.DisplayFor(modelItem => item.Delivery)
-                                </td>
-                                <td style="width: 20em;">
-                                    @Html.DisplayFor(modelItem => item.TaskName)
-                                </td>
-                                <td style="width: 6em;">
-                                    @Html.DisplayFor(modelItem => item.TaskStatus)
-                                </td>
-                                <td style="width:12em">
-                                    @Html.DisplayFor(modelItem => item.DateTime)
-                                </td>
-                                <td style="width:33em">
-                                    @Html.DisplayFor(modelItem => item.TaskNotes)
-                                </td>
-                            </tr>
-                        }
-                    </table>
-                </div>
-            </td>
-            </tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="width: 8.5em;">
+                            @Html.DisplayFor(modelItem => item.Delivery)
+                        </td>
+                        <td style="width: 15em;">
+                            @Html.DisplayFor(modelItem => item.TaskName)
+                        </td>
+                        <td style="width: 5.2em;">
+                            @Html.DisplayFor(modelItem => item.TaskStatus)
+                        </td>
+                        <td style="width:10em">
+                            @Html.DisplayFor(modelItem => item.DateTime)
+                        </td>
+                        <td style="width:33em">
+                            @Html.DisplayFor(modelItem => item.TaskNotes)
+                        </td>
+                    </tr>
+                }
         </table>
+    </div>
 </body>
 
 

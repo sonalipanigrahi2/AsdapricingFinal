@@ -27,23 +27,27 @@
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+            
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><b>Asda Pricing Administration Tool</b></a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand" style="color:white"><b>Asda Pricing Administration Tool</b></a>
             </div>
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li><a asp-area="" asp-controller="DeliveryStatus" asp-action="DeliveryStatus"><b>Delivery Status</b></a></li>
-            <li><a asp-area="" asp-controller="DeliveryStatus" asp-action="Settings"><b>Settings</b></a></li>
-            <li><a asp-area="" asp-controller="DeliveryStatus" asp-action="DeliveryStatusHistory"><b>History</b></a></li>
-        </ul>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="DeliveryStatus" asp-action="DeliveryStatus" style="color:white"><b>Delivery Status</b></a></li>
+                    <li><a asp-area="" asp-controller="DeliveryStatus" asp-action="Settings" style="color:white"><b>Settings</b></a></li>
+                    <li><a asp-area="" asp-controller="DeliveryStatus" asp-action="DeliveryStatusHistory" style="color:white"><b>History</b></a></li>
+                    <li><a asp-area="" asp-controller="DeliveryStatus" asp-action="QCPage" style="color:white"><b>Validation&QC</b></a></li>
+                    <li style="padding-left:20em"><a asp-area="" asp-controller="DeliveryStatus" asp-action="JobEx" style="color:white"><b><span style="font-size:22px;border:solid;">JobEx</span></b></a></li>
+
+                </ul>
+            </div>
         </div>
-    </div>
         </nav>
 
 

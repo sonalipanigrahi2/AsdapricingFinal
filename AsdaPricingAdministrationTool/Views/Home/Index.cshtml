@@ -1,34 +1,39 @@
 ﻿<!doctype html>
 <html lang="en">
 <head>
- <title>AsdaPricingAdministrationTool</title>
+    <title>AsdaPricingAdministrationTool</title>
 </head>
 @*<img src="~/images/IRI_Fullwidth1.jpg" width="1000" height="500">*@
-<body style="background-color:white;">
-    
+
+<body style="background-color:white">
+
     <div class="text-center" style="height: 700px; padding-top:4.3em;">
 
-        <h1 style="padding-left:1px">Asda Pricing Administration Tool</h1>
-        <div style="padding:2.5em; font-size:30px">
+        <h1 style="padding-left:1px;padding-top:2em;padding-bottom:1em">Asda Pricing Administration Tool</h1>
+        <img src="/ASDA_PRICING_ADMIN/images/IRI_logo_372x160.png" width="200" height="100">
+        <div style="padding:2em; font-size:30px">
             <div>
                 <a asp-area="" asp-controller="DeliveryStatus" asp-action="DeliveryStatus">Delivery Status</a>
             </div>
-            <br>
-            <div>
-                <a asp-area="" asp-controller="DeliveryStatus" asp-action="DeliveryStatus">Manual Corrections/Exclusions</a>
-            </div>
-            <br>
-            <div>
-                <a asp-area="" asp-controller="DeliveryStatus" asp-action="DeliveryStatus">Job Submissions</a>
-            </div>
-            <br>
+        @*<div>
+            <a asp-area="" asp-controller="DeliveryStatus" asp-action="DeliveryStatus">Manual Corrections/Exclusions</a>
+        </div>*@
+        <div>
+            <a asp-area="" asp-controller="DeliveryStatus" asp-action="JobEx">Job Submissions</a>
+        </div>
+
             <div>
                 <a asp-area="" asp-controller="DeliveryStatus" asp-action="Settings">Settings</a>
             </div>
-            <br>
+
             <div>
                 <a asp-area="" asp-controller="DeliveryStatus" asp-action="DeliveryStatusHistory">History</a>
             </div>
+
+            <div>
+                <a asp-area="" asp-controller="DeliveryStatus" asp-action="QCPage">Validations & QC</a>
+            </div>
+            
         </div>
     </div>
 </body>

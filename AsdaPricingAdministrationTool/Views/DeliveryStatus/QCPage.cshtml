@@ -1,0 +1,133 @@
+﻿@model dynamic
+
+<h1 style="padding-top:1em;text-align:center;color:olivedrab;margin-bottom:0.5em">
+    Validations & QC
+</h1>
+<div style="display:flex; flex-direction: row; justify-content: center; align-items: center;margin-bottom:1em">
+    <label for="Student">Report:</label>
+    <select class="form-control" id="QCtype" name="QCType" style="width:250px" onclick = "ChangeTable()">
+        <option>Field Master QC</option>
+        <option>Market Volumes QC</option>
+        <option>NETVide Mapping Part 1 QC</option>
+        <option>NETVide Mapping Part 2 QC</option>
+    </select>
+</div>
+<script>
+    function ChangeTable()
+    {
+        var dropvalue = document.getElementById('QCtype').value
+        if (dropvalue == 'Field Master QC')
+        {
+            document.getElementById('FiledMasterTab').style.display = 'block'
+            document.getElementById('MARKETVOLUMESTab').style.display = 'none'
+            document.getElementById('NETVIDEMAPPINGPART1Tab').style.display = 'none'
+            document.getElementById('NETVIDEMAPPINGPART2Tab').style.display = 'none'
+        }
+        else if (dropvalue == 'Market Volumes QC')
+        {
+            document.getElementById('FiledMasterTab').style.display = 'none'
+            document.getElementById('MARKETVOLUMESTab').style.display = 'block'
+            document.getElementById('NETVIDEMAPPINGPART1Tab').style.display = 'none'
+            document.getElementById('NETVIDEMAPPINGPART2Tab').style.display = 'none'
+        }
+        else if (dropvalue == 'NETVide Mapping Part 1 QC')
+        {
+            document.getElementById('FiledMasterTab').style.display = 'none'
+            document.getElementById('MARKETVOLUMESTab').style.display = 'none'
+            document.getElementById('NETVIDEMAPPINGPART1Tab').style.display = 'block'
+            document.getElementById('NETVIDEMAPPINGPART2Tab').style.display = 'none'
+        }
+        else
+        {
+            document.getElementById('FiledMasterTab').style.display = 'none'
+            document.getElementById('MARKETVOLUMESTab').style.display = 'none'
+            document.getElementById('NETVIDEMAPPINGPART1Tab').style.display = 'none'
+            document.getElementById('NETVIDEMAPPINGPART2Tab').style.display = 'block'
+        } 
+    }
+    </script>
+<table id="FiledMasterTab" class="table table-bordered" style="display: block;margin:auto;font-size:0.9em;width: 80%">
+    <thead>
+        <tr>
+            <th style="border-color:olivedrab">Retailer</th>
+            <th style="border-color:olivedrab">IRI Week</th>
+            <th style="border-color:olivedrab">Valid Products</th>
+        </tr>
+    </thead>
+    <tbody class="qctablebody">
+        @foreach (FIELDMASTER FIELDMASTERData in Model.FIELDMASTERQC)
+        {
+            <tr>
+                <td style="text-align:center">@FIELDMASTERData.Retailer</td>
+                <td style="text-align:center">@FIELDMASTERData.IRIWeek</td>
+                <td style="text-align:center">@FIELDMASTERData.ValidProducts</td>
+            </tr>
+        }
+</table>
+<table id="MARKETVOLUMESTab" class="table table-bordered" style="display:none;margin:auto;font-size:0.9em;width: 80%">
+    <thead>
+        <tr>
+            <th style="border-color:olivedrab">Retailer</th>
+            <th style="border-color:olivedrab">Collection Date</th>
+            <th style="border-color:olivedrab">Market Volume</th>
+            <th style="border-color:olivedrab">Market Volume Total</th>
+            <th style="border-color:olivedrab">Count of Estimated Market Volume</th>
+            <th style="border-color:olivedrab">Valid Products</th>
+            <th style="border-color:olivedrab">Lions Share Fails</th>
+        </tr>
+    </thead>
+    <tbody class="qctablebody">
+        @foreach (MARKETVOLUMES MARKETVOLUMESData in Model.MARKETVOLUMESQC)
+        {
+            <tr>
+                <td style="text-align:center">@MARKETVOLUMESData.Retailer</td>
+                <td style="text-align:center">@MARKETVOLUMESData.CollectionDate</td>
+                <td style="text-align:center">@MARKETVOLUMESData.MarketVolume</td>
+                <td style="text-align:center">@MARKETVOLUMESData.MarketVolumeTotal</td>
+                <td style="text-align:center">@MARKETVOLUMESData.CountofEstimatedMarketVolume</td>
+                <td style="text-align:center">@MARKETVOLUMESData.ValidProducts</td>
+                <td style="text-align:center">@MARKETVOLUMESData.LionsShareFails</td>
+
+            </tr>
+        }
+</table>
+<table id="NETVIDEMAPPINGPART1Tab" class="table table-bordered" style="display:none;font-size:small;margin:auto;font-size:0.9em;width: 80%"">
+    <thead>
+    <tr>
+        <th style="border-color:olivedrab">Retailer</th>
+        <th style="border-color:olivedrab">Batch ID</th>
+        <th style="border-color:olivedrab">File Name</th>
+        <th style="border-color:olivedrab">Valid Products</th>
+    </tr>
+    </thead>
+    <tbody class="qctablebody">
+        @foreach (NETVIDEMAPPINGPART1 NETVIDEMAPPINGPART1Data in Model.NETVIDEMAPPINGPART1QC)
+        {
+            <tr>
+                <td style="text-align:center">@NETVIDEMAPPINGPART1Data.Retailer</td>
+                <td style="text-align:center">@NETVIDEMAPPINGPART1Data.BatchID</td>
+                <td style="text-align:center">@NETVIDEMAPPINGPART1Data.FileName</td>
+                <td style="text-align:center">@NETVIDEMAPPINGPART1Data.ValidProducts</td>
+            </tr>
+        }
+
+</table>
+<table id="NETVIDEMAPPINGPART2Tab" class="table table-bordered" style="display:none;margin:auto;font-size:0.9em;width: 80%" ">
+    <thead>
+        <tr>
+            <th style="border-color:olivedrab">Retailer</th>
+            <th style="border-color:olivedrab">Batch ID</th>
+            <th style="border-color:olivedrab">Valid Products</th>
+        </tr>
+    </thead>
+    <tbody class="qctablebody">
+        @foreach (NETVIDEMAPPINGPART2 NETVIDEMAPPINGPART2Data in Model.GETNETVIDEMAPPINGPART2QC)
+        {
+            <tr>
+                <td style="text-align:center">@NETVIDEMAPPINGPART2Data.Retailer</td>
+                <td style="text-align:center">@NETVIDEMAPPINGPART2Data.BatchID</td>
+                <td style="text-align:center">@NETVIDEMAPPINGPART2Data.ValidProducts</td>
+            </tr>
+        }
+</table>
+

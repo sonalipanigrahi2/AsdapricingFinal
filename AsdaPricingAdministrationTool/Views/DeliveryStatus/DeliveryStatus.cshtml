@@ -13,50 +13,64 @@
 
 </h3>
 
-<body style="background-color:white;height: 1000px;">
-        <table class="table table-bordered table-bordered">
+<body style="background-color:white;">
+        <table class="table table-bordered" style="margin:auto;font-size:0.9em;width: 80%;height:60%">
             <thead>
                 <tr>
-                    <th style="width: 16.7em;">
+                    <th style="width: 8em; border-color:olivedrab">
                         Step
                     </th>
-                    <th style="width: 6em;">
+                    <th style="width: 2.77em;border-color:olivedrab">
                         Status
                     </th>
-                    <th style="width: 9em;">
+                    <th style="width: 4.93em;border-color:olivedrab">
                         Date/Time
                     </th>
-                    <th style="width: 21em;">
+                    <th style="width: 28em;border-color:olivedrab">
                         Notes
                     </th>
                 </tr>
             </thead>
             <tbody>
-            <td colspan="4">
-                <div>
-                    <table class=" table table-bordered table-bordered">
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td style="width: 25em;">
-                                    @Html.DisplayFor(modelItem => item.TaskName)
-                                </td>
-                                <td style="width: 9.3em;">
-                                    @Html.DisplayFor(modelItem => item.TaskStatus)
-                                </td>
-                                <td style="width: 13.8em;">
-                                    @Html.DisplayFor(modelItem => item.DateTime)
-                                </td>
-                                <td style="width: 30.5em">
-                                    @Html.DisplayFor(modelItem => item.TaskNotes)
-                                </td>
-                            </tr>
-                        }
-                    </table>
-                </div>
-            </td>
-        </tbody>
-    </table>
+                @foreach (var item in Model)
+                {
+                    if (item.TaskStatus.ToUpper() == "COMPLETE" || item.TaskStatus.ToUpper() == "COMPLETED")
+                    {
+                        <tr>
+                            <td style="width: 12em" >
+                                @Html.DisplayFor(modelItem => item.TaskName)
+                            </td>
+                            <td style="width: 4em;background:#CDDC39">
+                                @Html.DisplayFor(modelItem => item.TaskStatus)
+                            </td>
+                            <td style="width: 8em;">
+                                @Html.DisplayFor(modelItem => item.DateTime)
+                            </td>
+                            <td style="width: 40em">
+                                @Html.DisplayFor(modelItem => item.TaskNotes)
+                            </td>
+                        </tr>
+                    }
+                    else
+                    { 
+                        <tr>
+                            <td style="width: 12em;">
+                                @Html.DisplayFor(modelItem => item.TaskName)
+                            </td>
+                            <td style="width: 4em;">
+                                @Html.DisplayFor(modelItem => item.TaskStatus)
+                            </td>
+                            <td style="width: 8em;">
+                                @Html.DisplayFor(modelItem => item.DateTime)
+                            </td>
+                            <td style="width: 40em">
+                                @Html.DisplayFor(modelItem => item.TaskNotes)
+                            </td>
+                        </tr>
+                    }
+
+                }
+</table>
 </body>
 
 
