@@ -13,9 +13,11 @@ a {
 body {
     overflow: hidden;
 }
+
 html {
     overflow: hidden;
 }
+
 .Week {
     padding-left: 22.5em;
     padding-top: 0.5em;
@@ -28,12 +30,13 @@ html {
     height: 100%;
     padding: 0px !important;
 }
+
 th {
     background-color: olivedrab;
     text-align: center;
     color: white;
     padding: 15px;
-    width:auto;
+    width: auto;
 }
 
 tr:hover {
@@ -42,13 +45,12 @@ tr:hover {
 
 
 tbody {
-display: block;
-height:100%;
-overflow: auto;
+    display: block;
+    height: 100%;
+    overflow: auto;
 }
 
-.qctablebody 
-{
+.qctablebody {
     display: block;
     height: 34em;
     overflow: auto;
@@ -56,9 +58,9 @@ overflow: auto;
 
 
 thead, tbody tr {
-display: table;
-width: 100%;
-table-layout: fixed; /* even columns width , fix width of table too*/
+    display: table;
+    width: 100%;
+    table-layout: fixed; /* even columns width , fix width of table too*/
 }
 
 td {
@@ -76,6 +78,7 @@ td {
     border-color: olive;
     border-width: 5px;
 }
+
 .colorB {
     background-color: green
 }
@@ -83,3 +86,58 @@ td {
 .colorA {
     background-color: white
 }
+
+
+
+
+/*Added by shubh*/
+
+.fixed_header {
+    width: 80%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+    .fixed_header tbody {
+        width: 80%;
+        display: block;
+        width: 100%;
+        overflow-y: auto;
+        height: 60vh;
+    }
+
+    .fixed_header thead tr {
+        display: block;
+    }
+
+    .fixed_header thead {
+        background: black;
+        color: #fff;
+        
+    }
+
+    .fixed_header th, .fixed_header td {
+        padding: 5px;
+        text-align: left;
+        min-width: 20%;
+        text-align: center;
+    }
+
+
+/*Column width form History table tds and  th*/
+/*.col_width1 {
+    min-width: 20%;
+    max-width: 20%;
+}
+.col_width1 {
+    width: 20%;
+}
+.col_width1 {
+    width: 20%;
+}
+.col_width1 {
+    width: 20%;
+}
+.col_width1 {
+    width: 20%;
+}*/

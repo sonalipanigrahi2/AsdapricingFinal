@@ -9,22 +9,39 @@
 <br>
 <body style="background-color:white;height: 1000px;">
     <div>
-        <table class="table table-bordered" style="margin:auto;font-size:0.9em;width: 80%">
+        <table class="fixed_header table-bordered" style="margin:auto" >
             <thead>
-                <tr>
-                    <th style="width:8.5em;border-color:olivedrab">
+                @*<tr>
+            <th style="width:8.5em;border-color:olivedrab">
+                Delivery
+            </th>
+            <th style="width: 15em;border-color:olivedrab">
+                Step
+            </th>
+            <th style="width: 5.2em;border-color:olivedrab">
+                Status
+            </th>
+            <th style="width: 10.3em;border-color:olivedrab">
+                Date/Time
+            </th>
+            <th style="width: 34em;border-color:olivedrab">
+                Notes
+            </th>
+        </tr>*@
+                <tr style="width:100%;display:table-row">
+                    <th  class="col_width1" style="border-color:olivedrab">
                         Delivery
                     </th>
-                    <th style="width: 15em;border-color:olivedrab">
+                    <th class="col_width2" style="border-color:olivedrab">
                         Step
                     </th>
-                    <th style="width: 5.2em;border-color:olivedrab">
+                    <th class="col_width3" style="border-color:olivedrab">
                         Status
                     </th>
-                    <th style="width: 10.3em;border-color:olivedrab">
+                    <th class="col_width4" style="border-color:olivedrab">
                         Date/Time
                     </th>
-                    <th style="width: 34em;border-color:olivedrab">
+                    <th class="col_width5" style="border-color:olivedrab">
                         Notes
                     </th>
                 </tr>
@@ -32,25 +49,42 @@
             <tbody>
                 @foreach (var item in Model)
                 {
+                    @*<tr>
+                <td style="width: 8.5em;">
+                    @Html.DisplayFor(modelItem => item.Delivery)
+                </td>
+                <td style="width: 15em;">
+                    @Html.DisplayFor(modelItem => item.TaskName)
+                </td>
+                <td style="width: 5.2em;">
+                    @Html.DisplayFor(modelItem => item.TaskStatus)
+                </td>
+                <td style="width:10em">
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+                <td style="width:33em">
+                    @Html.DisplayFor(modelItem => item.TaskNotes)
+                </td>
+            </tr>*@
                     <tr>
-                        <td style="width: 8.5em;">
+                        <td class="col_width1" >
                             @Html.DisplayFor(modelItem => item.Delivery)
                         </td>
-                        <td style="width: 15em;">
+                        <td class="col_width2" >
                             @Html.DisplayFor(modelItem => item.TaskName)
                         </td>
-                        <td style="width: 5.2em;">
+                        <td class="col_width3">
                             @Html.DisplayFor(modelItem => item.TaskStatus)
                         </td>
-                        <td style="width:10em">
+                        <td class="col_width4">
                             @Html.DisplayFor(modelItem => item.DateTime)
                         </td>
-                        <td style="width:33em">
+                        <td class="col_width5">
                             @Html.DisplayFor(modelItem => item.TaskNotes)
                         </td>
                     </tr>
                 }
-        </table>
+</table>
     </div>
 </body>
 
