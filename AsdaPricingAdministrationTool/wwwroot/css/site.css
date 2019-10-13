@@ -96,7 +96,7 @@ td {
         display: block;
         width: 100%;
         overflow-y: auto;
-        height: 60vh;
+        height: calc(100vh - 200px);
     }
 
     .fixed_header thead tr {
@@ -116,7 +116,9 @@ td {
         text-align: center;
     }
 
-
+    .table-bordered{
+        border:none !important;
+    }
 /*Column width form History table tds and  th*/
 /*.col_width1 {
     min-width: 20%;
