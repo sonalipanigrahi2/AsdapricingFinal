@@ -5,7 +5,7 @@
 </h1>
 <div style="display:flex; flex-direction: row; justify-content: center; align-items: center;margin-bottom:1em">
     <label for="Student">Report:</label>
-    <select class="form-control" id="QCtype" name="QCType" style="width:250px" onclick = "ChangeTable()">
+    <select class="form-control" id="QCtype" name="QCType" style="width:250px" onclick="ChangeTable()">
         <option>Field Master QC</option>
         <option>Market Volumes QC</option>
         <option>NETVide Mapping Part 1 QC</option>
@@ -13,120 +13,115 @@
     </select>
 </div>
 <script>
-    function ChangeTable()
-    {
+    function ChangeTable() {
         var dropvalue = document.getElementById('QCtype').value
-        if (dropvalue == 'Field Master QC')
-        {
+        if (dropvalue == 'Field Master QC') {
             document.getElementById('FiledMasterTab').style.display = 'block'
             document.getElementById('MARKETVOLUMESTab').style.display = 'none'
             document.getElementById('NETVIDEMAPPINGPART1Tab').style.display = 'none'
             document.getElementById('NETVIDEMAPPINGPART2Tab').style.display = 'none'
         }
-        else if (dropvalue == 'Market Volumes QC')
-        {
+        else if (dropvalue == 'Market Volumes QC') {
             document.getElementById('FiledMasterTab').style.display = 'none'
             document.getElementById('MARKETVOLUMESTab').style.display = 'block'
             document.getElementById('NETVIDEMAPPINGPART1Tab').style.display = 'none'
             document.getElementById('NETVIDEMAPPINGPART2Tab').style.display = 'none'
         }
-        else if (dropvalue == 'NETVide Mapping Part 1 QC')
-        {
+        else if (dropvalue == 'NETVide Mapping Part 1 QC') {
             document.getElementById('FiledMasterTab').style.display = 'none'
             document.getElementById('MARKETVOLUMESTab').style.display = 'none'
             document.getElementById('NETVIDEMAPPINGPART1Tab').style.display = 'block'
             document.getElementById('NETVIDEMAPPINGPART2Tab').style.display = 'none'
         }
-        else
-        {
+        else {
             document.getElementById('FiledMasterTab').style.display = 'none'
             document.getElementById('MARKETVOLUMESTab').style.display = 'none'
             document.getElementById('NETVIDEMAPPINGPART1Tab').style.display = 'none'
             document.getElementById('NETVIDEMAPPINGPART2Tab').style.display = 'block'
-        } 
+        }
     }
-    </script>
-<table id="FiledMasterTab" class="table table-bordered" style="display: block;margin:auto;font-size:0.9em;width: 80%">
+</script>
+<table id="FiledMasterTab" class="fixed_header table-bordered" style="margin:auto;display:block">
     <thead>
-        <tr>
-            <th style="border-color:olivedrab">Retailer</th>
-            <th style="border-color:olivedrab">IRI Week</th>
-            <th style="border-color:olivedrab">Valid Products</th>
+        <tr style="width:100%;display:table-row">
+            <th style="width:33.333%;border-color:olivedrab">Retailer</th>
+            <th style="width:33.333%;border-color:olivedrab">IRI Week</th>
+            <th style="width:33.333%;border-color:olivedrab">Valid Products</th>
         </tr>
     </thead>
-    <tbody class="qctablebody">
+    <tbody>
         @foreach (FIELDMASTER FIELDMASTERData in Model.FIELDMASTERQC)
         {
             <tr>
-                <td style="text-align:center">@FIELDMASTERData.Retailer</td>
-                <td style="text-align:center">@FIELDMASTERData.IRIWeek</td>
-                <td style="text-align:center">@FIELDMASTERData.ValidProducts</td>
+                <td style="width:33.333%;">@FIELDMASTERData.Retailer</td>
+                <td style="width:33.333%;">@FIELDMASTERData.IRIWeek</td>
+                <td style="width:33.333%;">@FIELDMASTERData.ValidProducts</td>
             </tr>
         }
 </table>
-<table id="MARKETVOLUMESTab" class="table table-bordered" style="display:none;margin:auto;font-size:0.9em;width: 80%">
+<table id="MARKETVOLUMESTab"class="fixed_header table-bordered" style="margin:auto;display:none">
     <thead>
-        <tr>
-            <th style="border-color:olivedrab">Retailer</th>
-            <th style="border-color:olivedrab">Collection Date</th>
-            <th style="border-color:olivedrab">Market Volume</th>
-            <th style="border-color:olivedrab">Market Volume Total</th>
-            <th style="border-color:olivedrab">Count of Estimated Market Volume</th>
-            <th style="border-color:olivedrab">Valid Products</th>
-            <th style="border-color:olivedrab">Lions Share Fails</th>
+        <tr style="width:100%;display:table-row">
+            <th  style="width:14.285%;border-color:olivedrab">Retailer</th>
+            <th  style="width:14.285%;border-color:olivedrab">Collection Date</th>
+            <th  style="width:14.285%;border-color:olivedrab">Market Volume</th>
+            <th  style="width:14.285%;border-color:olivedrab">Market Volume Total</th>
+            <th  style="width:14.285%;border-color:olivedrab">Count of Estimated Market Volume</th>
+            <th  style="width:14.285%;border-color:olivedrab">Valid Products</th>
+            <th  style="width:14.285%;border-color:olivedrab">Lions Share Fails</th>
         </tr>
     </thead>
-    <tbody class="qctablebody">
+    <tbody>
         @foreach (MARKETVOLUMES MARKETVOLUMESData in Model.MARKETVOLUMESQC)
         {
             <tr>
-                <td style="text-align:center">@MARKETVOLUMESData.Retailer</td>
-                <td style="text-align:center">@MARKETVOLUMESData.CollectionDate</td>
-                <td style="text-align:center">@MARKETVOLUMESData.MarketVolume</td>
-                <td style="text-align:center">@MARKETVOLUMESData.MarketVolumeTotal</td>
-                <td style="text-align:center">@MARKETVOLUMESData.CountofEstimatedMarketVolume</td>
-                <td style="text-align:center">@MARKETVOLUMESData.ValidProducts</td>
-                <td style="text-align:center">@MARKETVOLUMESData.LionsShareFails</td>
+                <td style="width:14.285%;">@MARKETVOLUMESData.Retailer</td>
+                <td style="width:14.285%;">@MARKETVOLUMESData.CollectionDate</td>
+                <td style="width:14.285%;">@MARKETVOLUMESData.MarketVolume</td>
+                <td style="width:14.285%;">@MARKETVOLUMESData.MarketVolumeTotal</td>
+                <td style="width:14.285%;">@MARKETVOLUMESData.CountofEstimatedMarketVolume</td>
+                <td style="width:14.285%;">@MARKETVOLUMESData.ValidProducts</td>
+                <td style="width:14.285%;">@MARKETVOLUMESData.LionsShareFails</td>
 
             </tr>
         }
 </table>
-<table id="NETVIDEMAPPINGPART1Tab" class="table table-bordered" style="display:none;font-size:small;margin:auto;font-size:0.9em;width: 80%"">
+<table id="NETVIDEMAPPINGPART1Tab" class="fixed_header table-bordered" style="margin:auto;display:none">
     <thead>
-    <tr>
-        <th style="border-color:olivedrab">Retailer</th>
-        <th style="border-color:olivedrab">Batch ID</th>
-        <th style="border-color:olivedrab">File Name</th>
-        <th style="border-color:olivedrab">Valid Products</th>
-    </tr>
+        <tr style="width:100%;display:table-row">
+            <th style="width: 25%; border-color:olivedrab">Retailer</th>
+            <th style="width: 25%; border-color:olivedrab">Batch ID</th>
+            <th style="width: 25%; border-color:olivedrab">File Name</th>
+            <th style="width: 25%; border-color:olivedrab">Valid Products</th>
+        </tr>
     </thead>
-    <tbody class="qctablebody">
+    <tbody>
         @foreach (NETVIDEMAPPINGPART1 NETVIDEMAPPINGPART1Data in Model.NETVIDEMAPPINGPART1QC)
         {
             <tr>
-                <td style="text-align:center">@NETVIDEMAPPINGPART1Data.Retailer</td>
-                <td style="text-align:center">@NETVIDEMAPPINGPART1Data.BatchID</td>
-                <td style="text-align:center">@NETVIDEMAPPINGPART1Data.FileName</td>
-                <td style="text-align:center">@NETVIDEMAPPINGPART1Data.ValidProducts</td>
+                <td  style="width: 25%;">@NETVIDEMAPPINGPART1Data.Retailer</td>
+                <td  style="width: 25%;">@NETVIDEMAPPINGPART1Data.BatchID</td>
+                <td  style="width: 25%;">@NETVIDEMAPPINGPART1Data.FileName</td>
+                <td  style="width: 25%;">@NETVIDEMAPPINGPART1Data.ValidProducts</td>
             </tr>
         }
 
 </table>
-<table id="NETVIDEMAPPINGPART2Tab" class="table table-bordered" style="display:none;margin:auto;font-size:0.9em;width: 80%" ">
+<table id="NETVIDEMAPPINGPART2Tab" class="fixed_header table-bordered" style="margin:auto;display:none">
     <thead>
-        <tr>
-            <th style="border-color:olivedrab">Retailer</th>
-            <th style="border-color:olivedrab">Batch ID</th>
-            <th style="border-color:olivedrab">Valid Products</th>
+        <tr style="width:100%;display:table-row">
+            <th style="width:33.333%;border-color:olivedrab">Retailer</th>
+            <th style="width:33.333%;border-color:olivedrab">Batch ID</th>
+            <th style="width:33.333%;border-color:olivedrab">Valid Products</th>
         </tr>
     </thead>
-    <tbody class="qctablebody">
+    <tbody>
         @foreach (NETVIDEMAPPINGPART2 NETVIDEMAPPINGPART2Data in Model.GETNETVIDEMAPPINGPART2QC)
         {
             <tr>
-                <td style="text-align:center">@NETVIDEMAPPINGPART2Data.Retailer</td>
-                <td style="text-align:center">@NETVIDEMAPPINGPART2Data.BatchID</td>
-                <td style="text-align:center">@NETVIDEMAPPINGPART2Data.ValidProducts</td>
+                <td style="width:33.333%;">@NETVIDEMAPPINGPART2Data.Retailer</td>
+                <td style="width:33.333%;">@NETVIDEMAPPINGPART2Data.BatchID</td>
+                <td style="width:33.333%;">@NETVIDEMAPPINGPART2Data.ValidProducts</td>
             </tr>
         }
 </table>

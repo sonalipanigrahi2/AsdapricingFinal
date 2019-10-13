@@ -9,42 +9,42 @@
 
 <body style="background-color:white;height: 1000px;padding-top:1.8em">
     <br>
-    <table class="table table-bordered" style="margin:auto;font-size:0.9em;width: 80%">
+    <table class="fixed_header table table-bordered" style="margin:auto;">
         <thead>
-            <tr>
-                <th style="width: 14.3em;border-color:olivedrab">
+            <tr style="width:100%;display:table-row">
+                <th style="border-color:olivedrab">
                     Name
                 </th>
-                <th style="width: 22.3em;border-color:olivedrab">
+                <th style="border-color:olivedrab">
                     Value
-                <th style="width: 22.1em;border-color:olivedrab">
+                <th style="border-color:olivedrab">
                     Description
                 </th>
-                <th style="width: 13em;border-color:olivedrab">
+                <th style="border-color:olivedrab">
                     Date/Time
                 </th>
-                <th style="width: 9.6em;border-color:olivedrab">Action</th>
+                <th style="border-color:olivedrab">Action</th>
             </tr>
         </thead>
-        <tbody style="height:28.6em">
+        <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td class="ParamName" style="width: 14.2em;">
+                            <td class="ParamName">
                                 <span id="paramname1">@item.ParamName</span>
                             </td>
-                            <td class="value" style="width: 22em;">
+                            <td class="value">
                                 <span id="@item.PID+1" value="@item.ParamValue">@item.ParamValue</span>
                                 <input type="text" value="@item.ParamValue" id="@item.PID+2" style="display:none;width:22.1em;height:2.5em" />
 
                             </td>
-                            <td class="desc" style="width: 22em;">
+                            <td class="desc">
                                 <span>@item.ParamDesc</span>
                             </td>
-                            <td class="datetime" style="width: 13em;">
+                            <td class="datetime">
                                 <span>@item.DateTime</span>
                             </td>
-                            <td style="width:9.5em;">
+                            <td>
                                 <a onclick="ChangeView('@item.PID')" id="@item.PID+edit" style="cursor:pointer">Edit</a>
                                 @* <a onclick="location.href='@Url.Action("Settings", "DeliveryStatus", new {Paramval=item.ParamValue,id =item.PID ,update=0}),ChangeView(),'">Edit</a>*@
                                 <a onclick="saveview(@item.PID)" style="display:none;cursor:pointer" id="@item.PID+save">Save</a>
