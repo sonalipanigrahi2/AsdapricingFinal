@@ -16,6 +16,7 @@ namespace AsdaPricingAdministrationTool.Models
      public string TaskName { get; set; }
      public string TaskStatus { get; set; }
      public string TaskDesc { get; set; }
+     [DisplayFormat(ApplyFormatInEditMode = true,DataFormatString = "{0:dd/MM/yyyy HH:mm:ss tt}")]
      public DateTime? DateTime { get; set; }
      public string TaskNotes { get; set; }
     }
@@ -27,6 +28,7 @@ namespace AsdaPricingAdministrationTool.Models
         public string ParamName { get; set; }
         public string ParamValue { get; set; }
         public string ParamDesc { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy HH:mm:ss tt}")]
         public DateTime? DateTime { get; set; }
     }
     [Table("Delivery_Status_History", Schema = "ops")]
@@ -42,6 +44,7 @@ namespace AsdaPricingAdministrationTool.Models
         public string TaskName { get; set; }
         public string TaskStatus { get; set; }
         public string TaskDesc { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy HH:mm:ss tt}")]
         public DateTime? DateTime { get; set; }
         public string TaskNotes { get; set; }
     }
@@ -62,6 +65,7 @@ namespace AsdaPricingAdministrationTool.Models
         [Column(Order = 1)]
         public string Retailer { get; set; }
         [Column("Collection Date",Order =2)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime CollectionDate { get; set; }
         [Column("Market Volume")]
         public int MarketVolume { get; set; }
@@ -93,9 +97,25 @@ namespace AsdaPricingAdministrationTool.Models
         public string Retailer { get; set; }
         [Column("Batch ID",Order =2)]
         public Int32 BatchID { get; set; }
+        [Column("Collection Date", Order = 3)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime CollectionDate { get; set; }
         [Column("Valid Products")]
         public int ValidProducts { get; set; }
     }
+    //public class NETVIDEMAPPINGPART2
+    //{
+    //    [Key]
+    //    [Column(Order = 1)]
+    //    public string Retailer { get; set; }
+    //    [Column("Batch ID", Order = 2)]
+    //    public Int32 BatchID { get; set; }
+    //    [Column("Collection Date", Order = 3)]
+    //    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+    //    public DateTime CollectionDate { get; set; }
+    //    [Column("Valid Products")]
+    //    public int ValidProducts { get; set; }
+    //}
 }
 
 

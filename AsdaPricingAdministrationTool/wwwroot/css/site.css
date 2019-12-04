@@ -81,10 +81,6 @@ td {
 }
 
 
-
-
-/*Added by shubh*/
-
 .fixed_header {
     width: 80%;
     table-layout: fixed;
@@ -119,20 +115,32 @@ td {
     .table-bordered{
         border:none !important;
     }
-/*Column width form History table tds and  th*/
-/*.col_width1 {
-    min-width: 20%;
-    max-width: 20%;
+.fixed_header_QCPage {
+    width: 80%;
+    table-layout: fixed;
+    border-collapse: collapse;
 }
-.col_width1 {
-    width: 20%;
-}
-.col_width1 {
-    width: 20%;
-}
-.col_width1 {
-    width: 20%;
-}
-.col_width1 {
-    width: 20%;
-}*/
+
+    .fixed_header_QCPage tbody {
+        width: 80%;
+        display: block;
+        width: 100%;
+        overflow-y: auto;
+        height: calc(87.5vh - 200px);
+    }
+
+    .fixed_header_QCPage thead tr {
+        display: block;
+    }
+
+    .fixed_header_QCPage thead {
+        background: black;
+        color: #fff;
+    }
+
+    .fixed_header_QCPage th, .fixed_header_QCPage td {
+        padding: 5px;
+        text-align: left;
+        min-width: 20%;
+        text-align: center;
+    }

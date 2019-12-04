@@ -35,18 +35,18 @@
                             </td>
                             <td class="value">
                                 <span id="@item.PID+1" value="@item.ParamValue">@item.ParamValue</span>
-                                <input type="text" value="@item.ParamValue" id="@item.PID+2" style="display:none;width:22.1em;height:2.5em" />
+                                <input type="text" value="@item.ParamValue" id="@item.PID+2" style="display:none;width:100%;height:2.5em" />
 
                             </td>
-                            <td class="desc">
-                                <span>@item.ParamDesc</span>
-                            </td>
-                            <td class="datetime">
-                                <span>@item.DateTime</span>
-                            </td>
                             <td>
-                                <a onclick="ChangeView('@item.PID')" id="@item.PID+edit" style="cursor:pointer">Edit</a>
-                                @* <a onclick="location.href='@Url.Action("Settings", "DeliveryStatus", new {Paramval=item.ParamValue,id =item.PID ,update=0}),ChangeView(),'">Edit</a>*@
+                                @Html.DisplayFor(modelItem => item.ParamDesc)
+                           </td>
+                           <td>
+                               @Html.DisplayFor(modelItem => item.DateTime)
+                           </td>
+                           <td>
+                               <a onclick="ChangeView('@item.PID')" id="@item.PID+edit" style="cursor:pointer">Edit</a>
+                            @* <a onclick="location.href='@Url.Action("Settings", "DeliveryStatus", new {Paramval=item.ParamValue,id =item.PID ,update=0}),ChangeView(),'">Edit</a>*@
                                 <a onclick="saveview(@item.PID)" style="display:none;cursor:pointer" id="@item.PID+save">Save</a>
                                 <a onclick="cancelview()" style="display:none;cursor:pointer" id="@item.PID+cancel">Cancel</a>
                             </td>

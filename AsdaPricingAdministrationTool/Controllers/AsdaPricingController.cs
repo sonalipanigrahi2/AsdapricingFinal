@@ -40,7 +40,7 @@ namespace AsdaPricingAdministrationTool.Controllers
             //return View(_context.Delivery_Status_History.ToList());
 
             //HistoryData = _context.Delivery_Status_History.FromSql("select * from [ops].[Delivery_Status_History] order by Delivery Desc,Taskorder Asc").ToList();
-            return View(_context.Delivery_Status_History.FromSql("select * from [ops].[Delivery_Status_History] order by Delivery Desc,Taskorder Asc").ToList());
+            return View(_context.Delivery_Status_History.FromSql("select * from [ops].[Delivery_Status_History] order by cast(RIGHT(Delivery,LEN(Delivery)-4) AS smalldatetime) Desc,Taskorder Asc").ToList());
         }
         [HttpGet("[action]")]
         public IActionResult JobEx()
@@ -78,14 +78,14 @@ namespace AsdaPricingAdministrationTool.Controllers
         public List<FIELDMASTER> GetFieldQC()
         {
             List<FIELDMASTER> FIELDMASTERQC = new List<FIELDMASTER>();
-            FIELDMASTERQC = _context.FIELDMASTER.FromSql("select * from [QC].[FIELD_MASTER] order by Retailer asc,[IRI Week] desc").ToList();
+            FIELDMASTERQC = _context.FIELDMASTER.FromSql("select * from [QC].[FIELD_MASTER] order by Retailer asc,[IRI Week] asc").ToList();
             return FIELDMASTERQC;
 
         }
         public List<MARKETVOLUMES> GetMARKETVOLUMEQC()
         {
             List<MARKETVOLUMES> MARKETVOLUMESQC = new List<MARKETVOLUMES>();
-            MARKETVOLUMESQC = _context.MARKETVOLUMES.FromSql("select * from [QC].[MARKET_VOLUMES] order by Retailer asc,[Collection Date] desc").ToList();
+            MARKETVOLUMESQC = _context.MARKETVOLUMES.FromSql("select * from [QC].[MARKET_VOLUMES] order by Retailer asc,[Collection Date] asc").ToList();
             return MARKETVOLUMESQC;
 
         }
@@ -99,7 +99,7 @@ namespace AsdaPricingAdministrationTool.Controllers
         public List<NETVIDEMAPPINGPART2> GetNETVIDEMAPPINGPART2QC()
         {
             List<NETVIDEMAPPINGPART2> GETNETVIDEMAPPINGPART2QC = new List<NETVIDEMAPPINGPART2>();
-            GETNETVIDEMAPPINGPART2QC = _context.NETVIDEMAPPINGPART2.FromSql("select * from [QC].[NETVIDE_MAPPING_PART2] order by Retailer ,[Batch ID]").ToList();
+            GETNETVIDEMAPPINGPART2QC = _context.NETVIDEMAPPINGPART2.FromSql("select * from [QC].[NETVIDE_MAPPING_PART2] order by Retailer ,[Batch ID],[Collection Date] asc").ToList();
             return GETNETVIDEMAPPINGPART2QC;
         }
         [HttpGet("[action]")]

@@ -29,7 +29,7 @@ namespace AsdaPricingAdministrationTool.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Delivery_Status_History>()
-                .HasKey(o => new { o.Delivery, o.TaskName });
+                .HasKey(o => new { o.Delivery, o.TaskName});
             modelBuilder.Entity<FIELDMASTER>()
                .HasKey(o => new { o.Retailer, o.IRIWeek });
             modelBuilder.Entity<MARKETVOLUMES>()
@@ -37,7 +37,7 @@ namespace AsdaPricingAdministrationTool.Models
             modelBuilder.Entity<NETVIDEMAPPINGPART1>()
               .HasKey(o => new { o.Retailer, o.BatchID });
             modelBuilder.Entity<NETVIDEMAPPINGPART2>()
-              .HasKey(o => new { o.Retailer, o.BatchID });
+              .HasKey(o => new { o.Retailer, o.BatchID,o.CollectionDate });
         }
 
     }

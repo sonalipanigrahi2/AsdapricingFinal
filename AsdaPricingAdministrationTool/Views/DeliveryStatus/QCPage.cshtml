@@ -41,7 +41,7 @@
         }
     }
 </script>
-<table id="FiledMasterTab" class="fixed_header table-bordered" style="margin:auto;display:block">
+<table id="FiledMasterTab" class="fixed_header_QCPage table-bordered" style="margin:auto;display:block">
     <thead>
         <tr style="width:100%;display:table-row">
             <th style="width:33.333%;border-color:olivedrab">Retailer</th>
@@ -59,7 +59,7 @@
             </tr>
         }
 </table>
-<table id="MARKETVOLUMESTab"class="fixed_header table-bordered" style="margin:auto;display:none">
+<table id="MARKETVOLUMESTab"class="fixed_header_QCPage table-bordered" style="margin:auto;display:none">
     <thead>
         <tr style="width:100%;display:table-row">
             <th  style="width:14.285%;border-color:olivedrab">Retailer</th>
@@ -74,19 +74,22 @@
     <tbody>
         @foreach (MARKETVOLUMES MARKETVOLUMESData in Model.MARKETVOLUMESQC)
         {
-            <tr>
-                <td style="width:14.285%;">@MARKETVOLUMESData.Retailer</td>
-                <td style="width:14.285%;">@MARKETVOLUMESData.CollectionDate</td>
-                <td style="width:14.285%;">@MARKETVOLUMESData.MarketVolume</td>
-                <td style="width:14.285%;">@MARKETVOLUMESData.MarketVolumeTotal</td>
-                <td style="width:14.285%;">@MARKETVOLUMESData.CountofEstimatedMarketVolume</td>
-                <td style="width:14.285%;">@MARKETVOLUMESData.ValidProducts</td>
-                <td style="width:14.285%;">@MARKETVOLUMESData.LionsShareFails</td>
+        <tr>
+            <td style="width:14.285%;">@MARKETVOLUMESData.Retailer</td>
+            @*<td style="width:14.285%;">@MARKETVOLUMESData.CollectionDate</td>*@
+            <td style="width:14.285%;">
+                @Html.DisplayFor(modelItem => MARKETVOLUMESData.CollectionDate)
+            </td>
+            <td style="width:14.285%;">@MARKETVOLUMESData.MarketVolume</td>
+            <td style="width:14.285%;">@MARKETVOLUMESData.MarketVolumeTotal</td>
+            <td style="width:14.285%;">@MARKETVOLUMESData.CountofEstimatedMarketVolume</td>
+            <td style="width:14.285%;">@MARKETVOLUMESData.ValidProducts</td>
+            <td style="width:14.285%;">@MARKETVOLUMESData.LionsShareFails</td>
 
-            </tr>
+        </tr>
         }
 </table>
-<table id="NETVIDEMAPPINGPART1Tab" class="fixed_header table-bordered" style="margin:auto;display:none">
+<table id="NETVIDEMAPPINGPART1Tab" class="fixed_header_QCPage table-bordered" style="margin:auto;display:none">
     <thead>
         <tr style="width:100%;display:table-row">
             <th style="width: 25%; border-color:olivedrab">Retailer</th>
@@ -107,22 +110,27 @@
         }
 
 </table>
-<table id="NETVIDEMAPPINGPART2Tab" class="fixed_header table-bordered" style="margin:auto;display:none">
+<table id="NETVIDEMAPPINGPART2Tab" class="fixed_header_QCPage table-bordered" style="margin:auto;display:none">
     <thead>
         <tr style="width:100%;display:table-row">
-            <th style="width:33.333%;border-color:olivedrab">Retailer</th>
-            <th style="width:33.333%;border-color:olivedrab">Batch ID</th>
-            <th style="width:33.333%;border-color:olivedrab">Valid Products</th>
+            <th style="width:25%;border-color:olivedrab">Retailer</th>
+            <th style="width:25%;border-color:olivedrab">Batch ID</th>
+            <th style="width:25%;border-color:olivedrab">Collection Date</th>
+            <th style="width:25%;border-color:olivedrab">Valid Products</th>
         </tr>
     </thead>
     <tbody>
         @foreach (NETVIDEMAPPINGPART2 NETVIDEMAPPINGPART2Data in Model.GETNETVIDEMAPPINGPART2QC)
         {
-            <tr>
-                <td style="width:33.333%;">@NETVIDEMAPPINGPART2Data.Retailer</td>
-                <td style="width:33.333%;">@NETVIDEMAPPINGPART2Data.BatchID</td>
-                <td style="width:33.333%;">@NETVIDEMAPPINGPART2Data.ValidProducts</td>
-            </tr>
+        <tr>
+            <td style="width:25%;">@NETVIDEMAPPINGPART2Data.Retailer</td>
+            <td style="width:25%;">@NETVIDEMAPPINGPART2Data.BatchID</td>
+            @*<td style="width:25%;">@NETVIDEMAPPINGPART2Data.CollectionDate</td>*@
+            <td style="width:25%;">
+                @Html.DisplayFor(modelItem => NETVIDEMAPPINGPART2Data.CollectionDate)
+            </td>
+            <td style="width:25%;">@NETVIDEMAPPINGPART2Data.ValidProducts</td>
+        </tr>
         }
 </table>
 
