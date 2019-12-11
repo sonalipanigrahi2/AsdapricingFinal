@@ -16,16 +16,16 @@
         <table class="fixed_header table-bordered"  style="margin:auto;">
             <thead>
                 <tr style="width:100%;display:table-row">
-                    <th style="width: 25%; border-color:olivedrab">
+                    <th style="width: 27%; border-color:olivedrab">
                         Step
                     </th>
-                    <th style="width: 25%;border-color:olivedrab">
+                    <th style="width: 8%;border-color:olivedrab">
                         Status
                     </th>
-                    <th style="width: 25%;border-color:olivedrab">
+                    <th style="width: 15%;border-color:olivedrab">
                         Date/Time
                     </th>
-                    <th style="width: 25%;border-color:olivedrab">
+                    <th style="width: 50%;border-color:olivedrab">
                         Notes
                     </th>
                 </tr>
@@ -36,16 +36,16 @@
                     if (item.TaskStatus.ToUpper() == "COMPLETE" || item.TaskStatus.ToUpper() == "COMPLETED")
                     {
                         <tr>
-                            <td style="width: 25%" >
+                            <td style="width: 27%" >
                                 @Html.DisplayFor(modelItem => item.TaskName)
                             </td>
-                            <td style="width: 25%;background:#CDDC39">
+                            <td style="width: 8%;background:#CDDC39">
                                 @Html.DisplayFor(modelItem => item.TaskStatus)
                             </td>
-                            <td style="width: 25%;">
+                            <td style="width: 15%;">
                                 @Html.DisplayFor(modelItem => item.DateTime)
                             </td>
-                            <td style="width: 25%">
+                            <td style="width: 50%">
                                 @Html.DisplayFor(modelItem => item.TaskNotes)
                             </td>
                         </tr>
@@ -53,16 +53,16 @@
                     else
                     { 
                         <tr>
-                            <td style="width: 25%;">
+                            <td style="width: 27%;">
                                 @Html.DisplayFor(modelItem => item.TaskName)
                             </td>
-                            <td style="width: 25%;">
+                            <td style="width: 8%;">
                                 @Html.DisplayFor(modelItem => item.TaskStatus)
                             </td>
-                            <td style="width: 25%;">
+                            <td style="width: 15%;">
                                 @Html.DisplayFor(modelItem => item.DateTime)
                             </td>
-                            <td style="width: 25%">
+                            <td style="width: 50%">
                                 @Html.DisplayFor(modelItem => item.TaskNotes)
                             </td>
                         </tr>

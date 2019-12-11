@@ -55,10 +55,6 @@
         </tbody>
     </table>
 </body>
-
-
-
-
     <script type="text/javascript">
         var value1 = '', value2 = '', valueedit = '', valuesave = '', valuecancel = '';
         function ChangeView(PID) {
@@ -84,7 +80,7 @@
             window.location.href = 'https://localhost:44363/Settings'
             window.location.href = `${window.location.href}?Paramval=${placeholder}&id=${PID}&update=1`;
             console.log(window.location.href);
-            //    window.location.href = Url.Action("Settings", "DeliveryStatus", new { Paramval= placeholder, id = Value, update = 1 });
+            //   l
             document.getElementById(value2).style.display = 'none'
             document.getElementById(value1).style.display = 'block'
             document.getElementById(valuesave).style.display = 'none'

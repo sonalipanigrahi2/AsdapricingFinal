@@ -113,8 +113,127 @@ namespace AsdaPricingAdministrationTool.Controllers
             mymodel.GETNETVIDEMAPPINGPART2QC = GetNETVIDEMAPPINGPART2QC();
             return View(mymodel);
         }
-    }
+        //[HttpGet("[action]")]
+        //public IActionResult FIELDPRODUCTSISSUESREPORT()
+        //{
+        //  return View(_context.FIELD_PRODUCTS_ISSUES_REPORT_t.FromSql("SELECT * FROM csd.FIELD_PRODUCTS_ISSUES_REPORT_t").ToList());
+        //  //List<FIELD_PRODUCTS_ISSUES_REPORT_t> DataList = _context.FIELD_PRODUCTS_ISSUES_REPORT_t.ToList();
+        //  //return View(DataList);
+        //}
 
+        //[HttpPost]
+        [HttpGet("[action]")]
+        public IActionResult FIELDPRODUCTSISSUESREPORT(string Name, String Search, int update = 0, string Currprice=null , string Currlinksaveprice=null , string Excludedvalue = null, string IRI_WEEK = null, string ComName = null, string EAN = null)
+        {
+            string CompName = Name;
+            if ((CompName == "ALL" || CompName == null) && Search == null && update == 0)
+            {
+                //return View(_context.FIELD_PRODUCTS_ISSUES_REPORT_t.FromSql("SELECT * FROM csd.FIELD_PRODUCTS_ISSUES_REPORT_t").ToList());
+                List<FIELD_PRODUCTS_ISSUES_REPORT_t> DataList = _context.FIELD_PRODUCTS_ISSUES_REPORT_t.ToList();
+                ViewBag.RetDrop = "ALL";
+                return View(DataList);
+            }
+            else if ((CompName == "ALL" || CompName == null) && Search != null && update == 0)
+            {
+                //return View(_context.FIELD_PRODUCTS_ISSUES_REPORT_t.FromSql("SELECT * FROM csd.FIELD_PRODUCTS_ISSUES_REPORT_t").ToList());
+                List<FIELD_PRODUCTS_ISSUES_REPORT_t> DataList = _context.FIELD_PRODUCTS_ISSUES_REPORT_t.Where(x => x.COMP_ITEM_EAN.ToString().ToUpper().Contains(Search) || x.COMP_ITEM_DESC.ToUpper().Contains(Search)).ToList();
+                ViewBag.RetDrop = "ALL";
+                ViewBag.searchval = Search;
+                return View(DataList);
+            }
+            else if (CompName != null && Search != null && update == 0)
+            {
+                //return View(_context.FIELD_PRODUCTS_ISSUES_REPORT_t.FromSql($"SELECT * FROM csd.FIELD_PRODUCTS_ISSUES_REPORT_t where COMP_NAME='{CompName}' ").ToList());
+                // List<FIELD_PRODUCTS_ISSUES_REPORT_t> DataList = _context.FIELD_PRODUCTS_ISSUES_REPORT_t.Where(x => x.COMP_NAME == Name).ToList();
+                List<FIELD_PRODUCTS_ISSUES_REPORT_t> DataList = _context.FIELD_PRODUCTS_ISSUES_REPORT_t.Where(x => x.COMP_NAME.ToUpper() == Name && (x.COMP_ITEM_EAN.ToString().ToUpper().Contains(Search) || x.COMP_ITEM_DESC.ToUpper().Contains(Search))).ToList();
+                ViewBag.RetDrop = CompName;
+                ViewBag.searchval = Search;
+                return View(DataList);
+            }
+            else if (CompName != null && Search == null && update == 0)
+            {
+                List<FIELD_PRODUCTS_ISSUES_REPORT_t> DataList = _context.FIELD_PRODUCTS_ISSUES_REPORT_t.Where(x => x.COMP_NAME.ToUpper()== Name).ToList();
+                ViewBag.RetDrop = CompName;
+                return View(DataList);
+            }
+            else if ((CompName == "ALL" || CompName == null) && Search == null && update == 1)
+            {
+                ViewBag.RetDrop = "ALL";
+                ViewBag.searchval = Search;
+                var commandText1 = "update [ASD_UK_PRCV2_OPS].[csd].[FIELD_PRODUCTS_ISSUES_REPORT_t] set CUR_PRICE=@Currprice,CUR_LINKSAVE_PRICE=@Currlinksaveprice,EXCLUDED=@Excluded, " +
+                    "CORRECTED=1 WHERE IRI_WEEK=@IRI_WEEK and COMP_NAME=@COMPNAME and COMP_ITEM_EAN=@EAN";
+                var commandText2 = "update [ASD_UK_PRCV2_OPS].[csd].[field_product_master]  set COMP_ITEM_PRICE=@Currprice,COMP_ITEM_LINKSAVE_PRICE=@Currlinksaveprice,EXCLUDED=@Excluded, " +
+                 "CORRECTED=1 WHERE IRI_WEEK=@IRI_WEEK and COMP_NAME=@COMPNAME and COMP_ITEM_EAN=@EAN";
+                var Currentprice = new SqlParameter("@Currprice", Currprice);
+                var Currentlinksaveprice = new SqlParameter("@Currlinksaveprice", Currlinksaveprice ?? Convert.DBNull);
+                var ExcludedVal = new SqlParameter("@Excluded", Excludedvalue);
+                var WeekVal = new SqlParameter("@IRI_WEEK", IRI_WEEK);
+                var CompNameVal = new SqlParameter("@COMPNAME", ComName);
+                var EANVal = new SqlParameter("@EAN", EAN);
+                _context.Database.ExecuteSqlCommand(commandText1, Currentprice, Currentlinksaveprice, ExcludedVal, WeekVal, CompNameVal, EANVal);
+                _context.Database.ExecuteSqlCommand(commandText2, Currentprice, Currentlinksaveprice, ExcludedVal, WeekVal, CompNameVal, EANVal);
+                List<FIELD_PRODUCTS_ISSUES_REPORT_t> DataList = _context.FIELD_PRODUCTS_ISSUES_REPORT_t.ToList();
+                return View(DataList);
+            }
+            else if ((CompName == "ALL" || CompName == null) && Search != null && update == 1)
+            {
+                var commandText1 = "update [ASD_UK_PRCV2_OPS].[csd].[FIELD_PRODUCTS_ISSUES_REPORT_t] set CUR_PRICE=@Currprice,CUR_LINKSAVE_PRICE=@Currlinksaveprice,EXCLUDED=@Excluded, " +
+                       "CORRECTED=1 WHERE IRI_WEEK=@IRI_WEEK and COMP_NAME=@COMPNAME and COMP_ITEM_EAN=@EAN";
+                var commandText2 = "update [ASD_UK_PRCV2_OPS].[csd].[field_product_master]  set COMP_ITEM_PRICE=@Currprice,COMP_ITEM_LINKSAVE_PRICE=@Currlinksaveprice,EXCLUDED=@Excluded, " +
+                      "CORRECTED=1 WHERE IRI_WEEK=@IRI_WEEK and COMP_NAME=@COMPNAME and COMP_ITEM_EAN=@EAN";
+                var Currentprice = new SqlParameter("@Currprice", Currprice);
+                var Currentlinksaveprice = new SqlParameter("@Currlinksaveprice", Currlinksaveprice ?? Convert.DBNull);
+                var ExcludedVal = new SqlParameter("@Excluded", Excludedvalue);
+                var WeekVal = new SqlParameter("@IRI_WEEK", IRI_WEEK);
+                var CompNameVal = new SqlParameter("@COMPNAME", ComName);
+                var EANVal = new SqlParameter("@EAN", EAN);
+                _context.Database.ExecuteSqlCommand(commandText1, Currentprice, Currentlinksaveprice, ExcludedVal, WeekVal, CompNameVal, EANVal);
+                _context.Database.ExecuteSqlCommand(commandText2, Currentprice, Currentlinksaveprice, ExcludedVal, WeekVal, CompNameVal, EANVal);
+                List<FIELD_PRODUCTS_ISSUES_REPORT_t> DataList = _context.FIELD_PRODUCTS_ISSUES_REPORT_t.Where(x => x.COMP_ITEM_EAN.ToString().ToUpper().Contains(Search) || x.COMP_ITEM_DESC.ToUpper().Contains(Search)).ToList();
+                ViewBag.RetDrop = "ALL";
+                ViewBag.searchval = Search;
+                return View(DataList);
+            }
+            else if (CompName != null && Search != null && update == 1)
+            {
+                var commandText1= "update [ASD_UK_PRCV2_OPS].[csd].[FIELD_PRODUCTS_ISSUES_REPORT_t] set CUR_PRICE=@Currprice,CUR_LINKSAVE_PRICE=@Currlinksaveprice,EXCLUDED=@Excluded, " +
+                       "CORRECTED=1 WHERE IRI_WEEK=@IRI_WEEK and COMP_NAME=@COMPNAME and COMP_ITEM_EAN=@EAN";
+                var commandText2= "update [ASD_UK_PRCV2_OPS].[csd].[field_product_master]  set COMP_ITEM_PRICE=@Currprice,COMP_ITEM_LINKSAVE_PRICE=@Currlinksaveprice,EXCLUDED=@Excluded, " +
+                       "CORRECTED=1 WHERE IRI_WEEK=@IRI_WEEK and COMP_NAME=@COMPNAME and COMP_ITEM_EAN=@EAN";
+                var Currentprice = new SqlParameter("@Currprice", Currprice);
+                var Currentlinksaveprice = new SqlParameter("@Currlinksaveprice", Currlinksaveprice ?? Convert.DBNull);
+                var ExcludedVal = new SqlParameter("@Excluded", Excludedvalue);
+                var WeekVal = new SqlParameter("@IRI_WEEK", IRI_WEEK);
+                var CompNameVal = new SqlParameter("@COMPNAME", ComName);
+                var EANVal = new SqlParameter("@EAN", EAN);
+                _context.Database.ExecuteSqlCommand(commandText1, Currentprice, Currentlinksaveprice, ExcludedVal, WeekVal, CompNameVal, EANVal);
+                _context.Database.ExecuteSqlCommand(commandText2, Currentprice, Currentlinksaveprice, ExcludedVal, WeekVal, CompNameVal, EANVal);
+                List<FIELD_PRODUCTS_ISSUES_REPORT_t> DataList = _context.FIELD_PRODUCTS_ISSUES_REPORT_t.Where(x => x.COMP_NAME.ToUpper() == Name && (x.COMP_ITEM_EAN.ToString().ToUpper().Contains(Search) || x.COMP_ITEM_DESC.ToUpper().Contains(Search))).ToList();
+                ViewBag.RetDrop = CompName;
+                ViewBag.searchval = Search;
+                return View(DataList);
+            }
+            else
+            {
+                var commandText1 = "update [ASD_UK_PRCV2_OPS].[csd].[FIELD_PRODUCTS_ISSUES_REPORT_t] set CUR_PRICE=@Currprice,CUR_LINKSAVE_PRICE=@Currlinksaveprice,EXCLUDED=@Excluded, " +
+                         "CORRECTED=1 WHERE IRI_WEEK=@IRI_WEEK and COMP_NAME=@COMPNAME and COMP_ITEM_EAN=@EAN";
+                
+                var commandText2 = "update [ASD_UK_PRCV2_OPS].[csd].[field_product_master] set COMP_ITEM_PRICE=@Currprice,COMP_ITEM_LINKSAVE_PRICE=@Currlinksaveprice,EXCLUDED=@Excluded, " +
+                         "CORRECTED=1 WHERE IRI_WEEK=@IRI_WEEK and COMP_NAME=@COMPNAME and COMP_ITEM_EAN=@EAN";
+                var Currentprice = new SqlParameter("@Currprice", Currprice);
+                var Currentlinksaveprice = new SqlParameter("@Currlinksaveprice", Currlinksaveprice ?? Convert.DBNull);
+                var ExcludedVal = new SqlParameter("@Excluded", Excludedvalue);
+                var WeekVal = new SqlParameter("@IRI_WEEK", IRI_WEEK);
+                var CompNameVal = new SqlParameter("@COMPNAME", ComName);
+                var EANVal = new SqlParameter("@EAN", EAN);
+                _context.Database.ExecuteSqlCommand(commandText1, Currentprice, Currentlinksaveprice, ExcludedVal, WeekVal, CompNameVal, EANVal);
+                _context.Database.ExecuteSqlCommand(commandText2, Currentprice, Currentlinksaveprice, ExcludedVal, WeekVal, CompNameVal, EANVal);
+                List<FIELD_PRODUCTS_ISSUES_REPORT_t> DataList = _context.FIELD_PRODUCTS_ISSUES_REPORT_t.Where(x => x.COMP_NAME.ToUpper() == Name).ToList();
+                ViewBag.RetDrop = CompName;
+                return View(DataList);
+            }
+        }
+    }
 }
 
 

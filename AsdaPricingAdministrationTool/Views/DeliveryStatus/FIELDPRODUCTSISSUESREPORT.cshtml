@@ -1,0 +1,163 @@
+﻿@model IEnumerable<AsdaPricingAdministrationTool.Models.FIELD_PRODUCTS_ISSUES_REPORT_t>
+
+<h1 style="padding-top:1em;text-align:center;color:olivedrab;margin-bottom:0.5em">
+    Manual Corrections/Exclusions
+</h1>
+<div class="row" style="margin-left:10%;margin-bottom:2em;">
+    <label>Retailer:</label>
+    <select id="Retailer" name="Retailer" onchange="ChangeTable()" style="width: 15%;border: 1px solid #ccc;height:30px">
+        <option id="ALL">ALL</option>
+        <option id="MORRISONS">MORRISONS</option>
+        <option id="SAINSBURY">SAINSBURY</option>
+        <option id="TESCO">TESCO</option>
+    </select>
+    <label style="padding-left:40%">Search:</label>
+    <input type="search" id="searchval" style="width: 15%;border: 1px solid #ccc;height:30px">
+    <span>&nbsp;&nbsp;</span><input type="submit" id="submit" name="submit" value="Go" onclick="SearchVal()" style="border: 1px solid #ccc;height:30px;font-weight:bold" />
+    <span>&nbsp;&nbsp;</span><input type="submit" id="Clear" name="Clear" value="Clear" onclick="ClearVal()" style="border: 1px solid #ccc;height:30px;font-weight:bold" />
+</div>
+        <table id="FiledMasterTab" class="fixed_header_QCPage table-bordered" style="margin:auto;display:block">
+            <thead>
+                <tr style="width:100%;display:table-row">
+                    <th style="width:10%;border-color:olivedrab">Competitor Name</th>
+                    <th style="width:10%;border-color:olivedrab">EAN</th>
+                    <th style="width:24%;border-color:olivedrab">Description</th>
+                    <th style="width:8%;border-color:olivedrab">Prev Price</th>
+                    <th style="width:8%;border-color:olivedrab">Cur Price</th>
+                    <th style="width:8%;border-color:olivedrab">% Chg</th>
+                    <th style="width:10%;border-color:olivedrab">Current Linksave Price</th>
+                    <th style="width:8%;border-color:olivedrab">Corrected</th>
+                    <th style="width:8%;border-color:olivedrab">Excluded</th>
+                    <th style="width:7%;border-color:olivedrab">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="width:10%;">
+                            @Html.DisplayFor(modelItem => item.COMP_NAME)
+                        </td>
+                        <td style="width:10%;">
+                            @Html.DisplayFor(modelItem => item.COMP_ITEM_EAN)
+                        </td>
+                        <td style="width:24%;">
+                            @Html.DisplayFor(modelItem => item.COMP_ITEM_DESC)
+                        </td>
+                        <td style="width:8%;">
+                            @Html.DisplayFor(modelItem => item.PREV_PRICE)
+                        </td>
+                        <td style="width:8%;">
+                            @*@Html.DisplayFor(modelItem => item.CUR_PRICE)*@
+                            <span id="@item.IRI_Week@item.COMP_NAME@item.COMP_ITEM_EAN+curprc1" value="@item.CUR_PRICE">@item.CUR_PRICE</span>
+                            <input type="text" value="@item.CUR_PRICE" id="@item.IRI_Week@item.COMP_NAME@item.COMP_ITEM_EAN+curprc2" style="display:none;width:100%;height:2.5em" />
+                        </td>
+                        <td style="width:8%;">
+                            @Html.DisplayFor(modelItem => item.PER_PRICE_CHANGE)
+                        </td>
+                        <td style="width:10%;">
+                            @*@Html.DisplayFor(modelItem => item.CUR_LINKSAVE_PRICE)*@
+                            <span id="@item.IRI_Week@item.COMP_NAME@item.COMP_ITEM_EAN+curlinksaveprc1" value="@item.CUR_LINKSAVE_PRICE">@item.CUR_LINKSAVE_PRICE</span>
+                            <input type="text" value="@item.CUR_LINKSAVE_PRICE" id="@item.IRI_Week@item.COMP_NAME@item.COMP_ITEM_EAN+curlinksaveprc2" style="display:none;width:100%;height:2.5em" />
+                        </td>
+                        <td style="width:8%;">
+                            @Html.DisplayFor(modelItem => item.CORRECTED)
+                        </td>
+                        <td style="width:8%;">
+                            @*@Html.DisplayFor(modelItem => item.EXCLUDED)*@
+                            <span id="@item.IRI_Week@item.COMP_NAME@item.COMP_ITEM_EAN+EXCLUDED1" value="@item.EXCLUDED">@item.EXCLUDED</span>
+                            <select id="@item.IRI_Week@item.COMP_NAME@item.COMP_ITEM_EAN+EXCLUDED2" style="display:none;width:100%;height:2.5em">
+                            <option id="0">0</option>
+                            <option id="1">1</option>
+                            </select>
+                        </td>
+                        <td style="width:7%;">
+                            <a onclick="ChangeView(@item.IRI_Week,@item.COMP_NAME,'@item.COMP_ITEM_EAN')" id="@item.IRI_Week@item.COMP_NAME@item.COMP_ITEM_EAN+edit" style="cursor:pointer">Edit</a>
+                            @* <a onclick="location.href='@Url.Action("Settings", "DeliveryStatus", new {Paramval=item.ParamValue,id =item.PID ,update=0}),ChangeView(),'">Edit</a>*@
+                            <a onclick="saveview(@item.IRI_Week,@item.COMP_NAME,'@item.COMP_ITEM_EAN')" style="display:none;cursor:pointer" id="@item.IRI_Week@item.COMP_NAME@item.COMP_ITEM_EAN+save">Save</a>
+                            <a onclick="cancelview()" style="display:none;cursor:pointer" id="@item.IRI_Week@item.COMP_NAME@item.COMP_ITEM_EAN+cancel">Cancel</a>
+                        </td>
+                    </tr>
+                }
+        </table>
+        <script>
+
+        document.getElementById('Retailer').value = '@ViewBag.RetDrop';
+        document.getElementById('searchval').value ='@ViewBag.searchval';
+    function ChangeTable()
+    {
+        var dropvalue = document.getElementById('Retailer').value
+        console.log(window.location.href);
+        //window.location.href = 'Url.Action("FIELDPRODUCTSISSUESREPORT", "DeliveryStatus", new { Name= dropvalue })';
+        window.location.href = '@Url.Action("FIELDPRODUCTSISSUESREPORT", "DeliveryStatus")?Name=' + dropvalue;
+        }
+
+        function SearchVal()
+        {
+            var dropvalue = document.getElementById('Retailer').value.toUpperCase();
+            var submit = document.getElementById('searchval').value.toUpperCase();
+       // window.location.href = `${window.location.href}?Paramval=${placeholder}
+        //window.location.href = 'https://localhost:44363/FIELDPRODUCTSISSUESREPORT'
+        console.log(window.location.href);
+        //window.location.href = 'Url.Action("FIELDPRODUCTSISSUESREPORT", "DeliveryStatus", new { Name= dropvalue })';
+        window.location.href = '@Url.Action("FIELDPRODUCTSISSUESREPORT", "DeliveryStatus")?Name=' + dropvalue + '&Search=' + submit;
+        }
+        function ClearVal()
+        {
+            
+            document.getElementById('Retailer').value = '@ViewBag.RetDrop';
+            document.getElementById('searchval').value = '';
+            window.location.href = '@Url.Action("FIELDPRODUCTSISSUESREPORT", "DeliveryStatus")?Name=' + '@ViewBag.RetDrop' + '&Search=' + '';
+        }
+        var CURPRCVAL1 = '', CURPRCVAL2 = '', CURLINKPRCVAL1 = '', CURLINKPRCVAL2 = '', EXCLUDED1 = '', EXCLUDED2 ='', EDIT = '', SAVE = '', CANCEL = '';
+        function ChangeView(IRIWEEK, COMPNAME, EAN)
+        {
+            CURPRCVAL1 = IRIWEEK + COMPNAME.value + EAN+'+curprc1'
+            CURPRCVAL2 = IRIWEEK + COMPNAME.value + EAN + '+curprc2'
+            CURLINKPRCVAL1 = IRIWEEK + COMPNAME.value + EAN + '+curlinksaveprc1'
+            CURLINKPRCVAL2 = IRIWEEK + COMPNAME.value + EAN + '+curlinksaveprc2'
+            EXCLUDED1 = IRIWEEK + COMPNAME.value + EAN + '+EXCLUDED1'
+            EXCLUDED2 = IRIWEEK + COMPNAME.value + EAN + '+EXCLUDED2'
+            EDIT = IRIWEEK + COMPNAME.value + EAN +'+edit'
+            SAVE = IRIWEEK + COMPNAME.value + EAN +'+save'
+            CANCEL = IRIWEEK + COMPNAME.value + EAN +'+cancel'
+
+            document.getElementById(CURPRCVAL2).style.display = 'block'
+            document.getElementById(CURPRCVAL1).style.display = 'none'
+            document.getElementById(CURLINKPRCVAL2).style.display = 'block'
+            document.getElementById(CURLINKPRCVAL1).style.display = 'none'
+            document.getElementById(EXCLUDED2).style.display = 'block'
+            document.getElementById(EXCLUDED1).style.display = 'none'
+            document.getElementById(SAVE).style.display = 'block'
+            document.getElementById(CANCEL).style.display = 'block'
+            document.getElementById(EDIT).style.display = 'none'
+        }
+        function cancelview() {
+          // window.location.href = 'https://localhost:44363/FIELDPRODUCTSISSUESREPORT'
+            //window.location.href = '@Url.Action("FIELDPRODUCTSISSUESREPORT", "DeliveryStatus")?Name=' + dropvalue + '&Search=' + submit;
+            window.location.href = window.location.href;
+        }
+        function saveview(IRIWEEK, COMPNAME, EAN) {
+            //window.location.href = 'https://localhost:44363/FIELDPRODUCTSISSUESREPORT'
+            var dropvalue = document.getElementById('Retailer').value.toUpperCase();
+            var submit = document.getElementById('searchval').value.toUpperCase();
+            var Curprc2 = document.getElementById(CURPRCVAL2).value
+            var CurLinkprc2 = document.getElementById(CURLINKPRCVAL2).value
+            var Excld2 = document.getElementById(EXCLUDED2).value
+            window.location.href = '@Url.Action("FIELDPRODUCTSISSUESREPORT", "DeliveryStatus")?Name=' + dropvalue + '&Search=' + submit + '&update=' + 1 + '&Currprice=' + Curprc2 +
+                '&Currlinksaveprice=' + CurLinkprc2 + '&Excludedvalue=' + Excld2 + '&IRI_WEEK=' + IRIWEEK + '&ComName=' + COMPNAME.value + '&EAN=' + EAN;
+            console.log(window.location.href);
+            document.getElementById(CURPRCVAL2).style.display = 'block'
+            document.getElementById(CURPRCVAL1).style.display = 'none'
+            document.getElementById(CURLINKPRCVAL2).style.display = 'block'
+            document.getElementById(CURLINKPRCVAL1).style.display = 'none'
+            document.getElementById(EXCLUDED2).style.display = 'block'
+            document.getElementById(EXCLUDED1).style.display = 'none'
+            document.getElementById(SAVE).style.display = 'none'
+            document.getElementById(CANCEL).style.display = 'none'
+            document.getElementById(EDIT).style.display = 'block'
+        }
+
+
+
+        </script>

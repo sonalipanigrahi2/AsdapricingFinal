@@ -26,6 +26,7 @@ namespace AsdaPricingAdministrationTool.Models
         public DbSet<AsdaPricingAdministrationTool.Models.MARKETVOLUMES> MARKETVOLUMES { get; set; }
         public DbSet<AsdaPricingAdministrationTool.Models.NETVIDEMAPPINGPART1> NETVIDEMAPPINGPART1 { get; set; }
         public DbSet<AsdaPricingAdministrationTool.Models.NETVIDEMAPPINGPART2> NETVIDEMAPPINGPART2 { get; set; }
+        public DbSet<AsdaPricingAdministrationTool.Models.FIELD_PRODUCTS_ISSUES_REPORT_t> FIELD_PRODUCTS_ISSUES_REPORT_t { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Delivery_Status_History>()
@@ -38,6 +39,8 @@ namespace AsdaPricingAdministrationTool.Models
               .HasKey(o => new { o.Retailer, o.BatchID });
             modelBuilder.Entity<NETVIDEMAPPINGPART2>()
               .HasKey(o => new { o.Retailer, o.BatchID,o.CollectionDate });
+            modelBuilder.Entity<FIELD_PRODUCTS_ISSUES_REPORT_t>()
+              .HasKey(o => new { o.Collection_Date, o.IRI_Week, o.COMP_NAME,o.COMP_ITEM_EAN });
         }
 
     }

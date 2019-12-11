@@ -126,7 +126,7 @@ td {
         display: block;
         width: 100%;
         overflow-y: auto;
-        height: calc(87.5vh - 200px);
+        height: calc(87vh - 200px);
     }
 
     .fixed_header_QCPage thead tr {

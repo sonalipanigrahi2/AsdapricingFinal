@@ -12,19 +12,19 @@
         <table class="fixed_header table-bordered" style="margin:auto" >
             <thead>
                 <tr style="width:100%;display:table-row">
-                    <th   style="border-color:olivedrab">
+                    <th   style="width:15%;border-color:olivedrab">
                         Delivery
                     </th>
-                    <th  style="border-color:olivedrab">
+                    <th  style="width:27%;border-color:olivedrab">
                         Step
                     </th>
-                    <th  style="border-color:olivedrab">
+                    <th  style="width:8%;border-color:olivedrab">
                         Status
                     </th>
-                    <th  style="border-color:olivedrab">
+                    <th  style="width:15%;border-color:olivedrab">
                         Date/Time
                     </th>
-                    <th  style="border-color:olivedrab">
+                    <th  style="width:35%;border-color:olivedrab">
                         Notes
                     </th>
                 </tr>
@@ -33,19 +33,19 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
+                        <td  style="width:15%;">
                             @Html.DisplayFor(modelItem => item.Delivery)
                         </td>
-                        <td>
+                        <td  style="width:27%">
                             @Html.DisplayFor(modelItem => item.TaskName)
                         </td>
-                        <td>
+                        <td  style="width:8%">
                             @Html.DisplayFor(modelItem => item.TaskStatus)
                         </td>
-                        <td>
+                        <td  style="width:15%">
                             @Html.DisplayFor(modelItem => item.DateTime)
                         </td>
-                        <td>
+                        <td  style="width:35%">
                             @Html.DisplayFor(modelItem => item.TaskNotes)
                         </td>
                     </tr>
